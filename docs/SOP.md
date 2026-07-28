@@ -72,6 +72,7 @@ En BASELINE.md siempre se anota **qué nivel de la escalera se usó** por págin
 ```
 perf-toolkit/
 ├── scripts/
+│   ├── lib.mjs                # utilidades compartidas (CrUX API, .env, escalera, tablas)
 │   ├── crux-baseline.mjs      # p75 + histogramas, PHONE/DESKTOP, origin + 3 URLs
 │   ├── crux-history.mjs       # serie semanal ~6 meses (backtesting y cierre)
 │   ├── perf-check.mjs         # tabla semáforo de todas las marcas (--all lee stores.json)
@@ -79,7 +80,8 @@ perf-toolkit/
 ├── schemas/
 │   ├── baseline.schema.json
 │   ├── diagnostico.schema.json
-│   └── resultados.schema.json
+│   ├── resultados.schema.json
+│   └── ejemplos/              # un JSON válido por schema
 ├── prompts/                   # los 8 prompts del SOP, versionados
 ├── skills/
 │   ├── convertmate-report/    # PDFs de entregables con marca (SKILL.md + build-pdf.mjs + template + fonts)
@@ -88,7 +90,9 @@ perf-toolkit/
 ├── templates/
 │   ├── CONSTRAINTS.md         # plantilla v2 (sección 5, Paso 1)
 │   ├── checklist-qa.md        # checklist funcional del Paso 6.5
-│   └── mensajes-cliente.md    # intake, aviso de ventana, follow-up dashboard
+│   ├── mensajes-cliente.md    # intake, aviso de ventana, follow-up dashboard
+│   └── env.example            # se copia como .env por proyecto (Paso 1)
+├── package.json               # deps de screenshot-diff (puppeteer-core, pixelmatch, pngjs)
 └── stores.json                # marcas y sus 3 URLs (para perf-check --all)
 ```
 
@@ -97,6 +101,7 @@ perf-toolkit/
 ```bash
 # 1. Clonar el toolkit (actualizarlo después es solo git pull)
 git clone <repo>/perf-toolkit ~/perf-toolkit
+cd ~/perf-toolkit && npm install   # deps de screenshot-diff.mjs
 
 # 2. MCP de Chrome DevTools a nivel usuario
 claude mcp add -s user chrome-devtools npx chrome-devtools-mcp@latest

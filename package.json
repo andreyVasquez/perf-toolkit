@@ -1,0 +1,14 @@
+{
+  "name": "perf-toolkit",
+  "private": true,
+  "type": "module",
+  "description": "Toolkit de optimización de velocidad Shopify · ConvertMate",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "pixelmatch": "^6.0.0",
+    "pngjs": "^7.0.0",
+    "puppeteer-core": "^23.0.0"
+  }
+}
