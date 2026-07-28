@@ -30,11 +30,12 @@ cp -R ~/perf-toolkit/skills/* ~/.claude/skills/
 perf-toolkit/
 ├── docs/
 │   └── SOP.md                 # copia de referencia del SOP (canónico: Google Doc)
-├── scripts/                   # (pendientes de crear)
+├── scripts/                   # Node 18+, ESM, sin dependencias (fetch nativo)
+│   ├── lib.mjs                # utilidades compartidas (CrUX API, .env, escalera, tablas)
 │   ├── crux-baseline.mjs      # p75 + histogramas, PHONE/DESKTOP, origin + 3 URLs
 │   ├── crux-history.mjs       # serie semanal ~6 meses (backtesting y cierre)
 │   ├── perf-check.mjs         # tabla semáforo de todas las marcas (--all lee stores.json)
-│   └── screenshot-diff.mjs    # preview vs live, mobile+desktop, 3 URLs
+│   └── screenshot-diff.mjs    # (pendiente) preview vs live, mobile+desktop, 3 URLs
 ├── schemas/
 │   ├── baseline.schema.json   # v1, draft-07
 │   ├── diagnostico.schema.json
@@ -51,6 +52,17 @@ perf-toolkit/
 │   ├── mensajes-cliente.md    # intake, aviso de ventana, follow-up dashboard
 │   └── env.example            # copiar como .env por proyecto
 └── stores.json                # marcas y sus 3 URLs (para perf-check --all)
+```
+
+## Scripts CrUX
+
+Los tres leen `CRUX_API_KEY` del `.env` del directorio actual (o del entorno). Todos aceptan `--dry-run` para ver la salida con data de ejemplo sin API key. Un 404 de CrUX (sin data) no es error: activa la escalera de fallback de la sección 2 del SOP (page → origin, marcado en `fuente`; los niveles siguientes son manuales).
+
+```bash
+node scripts/crux-baseline.mjs --marca X          # o --home URL --pdp URL --collection URL
+                                                  # → tabla + data/baseline.json (solo PHONE al JSON)
+node scripts/crux-history.mjs --marca X           # serie semanal ~6 meses p75 móvil → data/history.json
+node scripts/perf-check.mjs --all                 # semáforo del portafolio (a demanda, sin estado)
 ```
 
 ## Uso por proyecto
