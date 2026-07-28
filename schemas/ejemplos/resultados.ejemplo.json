@@ -1,0 +1,24 @@
+[
+  {
+    "marca": "Marca Ejemplo",
+    "fecha": "2026-08-15",
+    "url": "https://www.ejemplo.com/",
+    "pagina": "home",
+    "metrica": "LCP",
+    "valor": 2450,
+    "unidad": "ms",
+    "fuente": "lab",
+    "metodologia_version": "2.0"
+  },
+  {
+    "marca": "Marca Ejemplo",
+    "fecha": "2026-08-15",
+    "url": "https://www.ejemplo.com/products/best-seller",
+    "pagina": "pdp",
+    "metrica": "peso_pagina",
+    "valor": 2100,
+    "unidad": "KB",
+    "fuente": "lab",
+    "metodologia_version": "2.0"
+  }
+]

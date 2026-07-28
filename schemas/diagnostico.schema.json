@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "diagnostico.schema.json",
+  "title": "Diagnóstico v1",
+  "description": "Hallazgos de la auditoría (Paso 4): un array de hallazgos clasificados por frente A/B/C.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "marca",
+      "fecha",
+      "hallazgo",
+      "frente",
+      "archivo_o_asset",
+      "metrica_impactada",
+      "severidad",
+      "esfuerzo",
+      "riesgo",
+      "estado"
+    ],
+    "properties": {
+      "marca": { "type": "string" },
+      "fecha": { "type": "string", "format": "date" },
+      "hallazgo": { "type": "string" },
+      "frente": { "enum": ["A", "B", "C"] },
+      "archivo_o_asset": { "type": "string" },
+      "metrica_impactada": { "type": "string" },
+      "severidad": { "type": "string" },
+      "esfuerzo": { "enum": ["quick-win", "medio", "complejo"] },
+      "riesgo": { "type": "string" },
+      "estado": { "enum": ["pendiente", "aplicado", "bloqueado-avisar"] }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+[
+  {
+    "marca": "Marca Ejemplo",
+    "fecha": "2026-07-28",
+    "url": "https://www.ejemplo.com/",
+    "pagina": "home",
+    "metrica": "LCP",
+    "valor": 3400,
+    "unidad": "ms",
+    "fuente": "crux-page",
+    "metodologia_version": "2.0"
+  },
+  {
+    "marca": "Marca Ejemplo",
+    "fecha": "2026-07-28",
+    "url": "https://www.ejemplo.com/products/best-seller",
+    "pagina": "pdp",
+    "metrica": "peso_pagina",
+    "valor": 4820,
+    "unidad": "KB",
+    "fuente": "lab",
+    "metodologia_version": "2.0"
+  },
+  {
+    "marca": "Marca Ejemplo",
+    "fecha": "2026-07-28",
+    "url": "https://www.ejemplo.com/collections/top",
+    "pagina": "collection",
+    "metrica": "CLS",
+    "valor": 0.18,
+    "unidad": "score",
+    "fuente": "shopify-rum",
+    "metodologia_version": "2.0"
+  }
+]

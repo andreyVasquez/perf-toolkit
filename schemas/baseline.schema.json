@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "baseline.schema.json",
+  "title": "Baseline v1",
+  "description": "Mediciones del punto de partida (Paso 3). Misma forma que resultados.schema.json: un array de mediciones.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "marca",
+      "fecha",
+      "url",
+      "pagina",
+      "metrica",
+      "valor",
+      "unidad",
+      "fuente",
+      "metodologia_version"
+    ],
+    "properties": {
+      "marca": { "type": "string" },
+      "fecha": { "type": "string", "format": "date" },
+      "url": { "type": "string", "format": "uri" },
+      "pagina": { "enum": ["home", "pdp", "collection"] },
+      "metrica": { "type": "string" },
+      "valor": { "type": "number" },
+      "unidad": { "type": "string" },
+      "fuente": { "enum": ["crux-page", "crux-origin", "shopify-rum", "lab"] },
+      "metodologia_version": { "type": "string" }
+    }
+  }
+}

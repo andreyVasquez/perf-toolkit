@@ -1,0 +1,26 @@
+[
+  {
+    "marca": "Marca Ejemplo",
+    "fecha": "2026-07-29",
+    "hallazgo": "SVG de 2.1 MB como imagen hero de la home; el CDN de Shopify no redimensiona SVG y llega entero al usuario",
+    "frente": "B",
+    "archivo_o_asset": "cdn.shopify.com/s/files/.../hero-banner.svg",
+    "metrica_impactada": "LCP",
+    "severidad": "alta",
+    "esfuerzo": "quick-win",
+    "riesgo": "bajo — reemplazo por WebP 1080px < 150 KB, sin cambio visual",
+    "estado": "pendiente"
+  },
+  {
+    "marca": "Marca Ejemplo",
+    "fecha": "2026-07-29",
+    "hallazgo": "Script de app de cuotas bloquea render ~800 ms en móvil; app intocable por mecánica de negocio (CONSTRAINTS)",
+    "frente": "A",
+    "archivo_o_asset": "layout/theme.liquid:42",
+    "metrica_impactada": "LCP",
+    "severidad": "media",
+    "esfuerzo": "medio",
+    "riesgo": "medio — mitigación con defer/facade, no se quita la app",
+    "estado": "bloqueado-avisar"
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "marca": "Marca Ejemplo",
+    "dominio": "https://www.ejemplo.com",
+    "home": "https://www.ejemplo.com/",
+    "pdp": "https://www.ejemplo.com/products/best-seller",
+    "collection": "https://www.ejemplo.com/collections/top"
+  },
+  {
+    "marca": "",
+    "dominio": "",
+    "home": "",
+    "pdp": "",
+    "collection": ""
+  }
+]
