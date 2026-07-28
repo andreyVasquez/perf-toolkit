@@ -1,10 +1,10 @@
 [
   {
-    "marca": "Marca Ejemplo",
-    "dominio": "https://www.ejemplo.com",
-    "home": "https://www.ejemplo.com/",
-    "pdp": "https://www.ejemplo.com/products/best-seller",
-    "collection": "https://www.ejemplo.com/collections/top"
+    "marca": "The Classic T-Shirt",
+    "dominio": "https://theclassictshirt.com",
+    "home": "https://theclassictshirt.com/",
+    "pdp": "https://theclassictshirt.com/products/womens-french-terry-shorts",
+    "collection": "https://theclassictshirt.com/collections/all"
   },
   {
     "marca": "",
