@@ -1,5 +1,12 @@
 [
   {
+    "marca": "Sayii",
+    "dominio": "https://www.sayiioficial.com",
+    "home": "https://www.sayiioficial.com/",
+    "pdp": "https://www.sayiioficial.com/products/coctel-capilar-complex-hyaluron-en-frio",
+    "collection": "https://www.sayiioficial.com/collections/cabello-en-pausa-crecimiento-lento-y-estancado-1"
+  },
+  {
     "marca": "Beauty Boost",
     "dominio": "https://beautyboost.com.co",
     "home": "https://beautyboost.com.co/",
@@ -7,10 +14,24 @@
     "collection": "https://beautyboost.com.co/collections/all"
   },
   {
-    "marca": "",
-    "dominio": "",
-    "home": "",
-    "pdp": "",
-    "collection": ""
+    "marca": "Lummia",
+    "dominio": "https://www.lummia.com.co",
+    "home": "https://www.lummia.com.co/",
+    "pdp": "https://www.lummia.com.co/products/lummiair",
+    "collection": "https://www.lummia.com.co/collections/frontpage"
+  },
+  {
+    "marca": "Bruselas",
+    "dominio": "https://bruselascocina.com",
+    "home": "https://bruselascocina.com/",
+    "pdp": "https://bruselascocina.com/products/set-de-3-sartenes",
+    "collection": "https://bruselascocina.com/collections/all"
+  },
+  {
+    "marca": "The Gummy Box",
+    "dominio": "https://thegummyboxwellness.com",
+    "home": "https://thegummyboxwellness.com/",
+    "pdp": "https://thegummyboxwellness.com/products/gomitas-con-vinagre-de-manzana",
+    "collection": "https://thegummyboxwellness.com/collections/nuestros-productos"
   }
 ]
