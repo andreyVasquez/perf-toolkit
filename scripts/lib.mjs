@@ -1,8 +1,8 @@
 // Utilidades compartidas por los scripts CrUX del toolkit.
 // Node 18+, ESM, sin dependencias externas (fetch nativo).
 
-import { readFileSync, existsSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readFileSync, existsSync, mkdirSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const REPO_ROOT = resolve(fileURLToPath(new URL('..', import.meta.url)));
@@ -68,11 +68,16 @@ export function resolveTarget(args) {
     const marca = typeof args.marca === 'string' ? args.marca : new URL(args.home).hostname;
     return { marca, urls: { home: args.home, pdp: args.pdp, collection: args.collection } };
   }
+  // Sin flags: las 3 URLs del .env del proyecto (HOME_URL/PDP_URL/COLLECTION_URL).
+  loadEnv();
+  if (typeof args.marca !== 'string' && process.env.HOME_URL && process.env.PDP_URL && process.env.COLLECTION_URL) {
+    return { marca: new URL(process.env.HOME_URL).hostname, urls: { home: process.env.HOME_URL, pdp: process.env.PDP_URL, collection: process.env.COLLECTION_URL } };
+  }
   if (typeof args.marca === 'string') {
     const s = storeByMarca(args.marca);
     return { marca: s.marca, urls: { home: s.home, pdp: s.pdp, collection: s.collection } };
   }
-  console.error('Uso: --home URL --pdp URL --collection URL  |  --marca X (lee stores.json). Opcional: --dry-run');
+  console.error('Uso: --home URL --pdp URL --collection URL  |  --marca X (lee stores.json)  |  sin flags dentro de la carpeta del proyecto (lee .env). Opcional: --out RUTA, --dry-run');
   process.exit(1);
 }
 
@@ -148,6 +153,18 @@ export function semaforo(label, valor) {
   if (valor <= u.verde) return '🟢';
   if (valor > u.rojo) return '🔴';
   return '🟡';
+}
+
+// Ruta de salida: --out archivo.json | --out carpeta/ ; default ./data/<defaultName> del cwd.
+// Avisa si se está escribiendo dentro del toolkit (casi siempre es un error: debe ir al proyecto).
+export function resolveOutPath(args, defaultName) {
+  const out = typeof args.out === 'string' ? resolve(process.cwd(), args.out) : null;
+  const path = out ? (/\.json$/i.test(out) ? out : resolve(out, defaultName)) : resolve(process.cwd(), 'data', defaultName);
+  if (path.startsWith(REPO_ROOT + '/')) {
+    console.error(`⚠️  La salida queda DENTRO del toolkit (${path}). Corre el script desde la carpeta del proyecto o pasa --out <proyecto>/data/.`);
+  }
+  mkdirSync(dirname(path), { recursive: true });
+  return path;
 }
 
 export function hoy() {

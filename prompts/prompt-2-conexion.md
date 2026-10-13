@@ -1,6 +1,7 @@
 # Prompt 2 · Conecta la tienda y haz tu copia
 
 > Paso 2 del SOP. Prerequisito: Paso 1 sin PENDIENTES. Recuerda `set -a && source .env && set +a` en cada shell nueva.
+> **Atajo:** `node $TK/scripts/new-project.mjs` hace los pasos 1-2 automáticos (carpeta, `.env`, pull, zip, git + tag baseline, duplicado, detección de tipo de tienda y app embeds). Este prompt queda para verificar su salida o para hacerlo a mano si el script falla.
 
 ---
 

@@ -5,6 +5,8 @@
 //   node scripts/crux-baseline.mjs --home URL --pdp URL --collection URL [--marca X]
 //   node scripts/crux-baseline.mjs --marca X            (lee stores.json)
 //   node scripts/crux-baseline.mjs --marca X --dry-run  (data de ejemplo, sin API)
+//   node <toolkit>/scripts/crux-baseline.mjs             (desde la carpeta del proyecto: URLs del .env)
+//   --out RUTA: archivo .json o carpeta. Default: ./data/baseline.json del directorio ACTUAL.
 //
 // Escalera de fallback (sección 2 del SOP): si una URL no tiene data page-level,
 // cae a origin-level y lo marca en el campo "fuente". Si tampoco hay origin, el
@@ -14,11 +16,10 @@
 // Al JSON van solo las mediciones PHONE (el dato de campo del SOP es p75 móvil);
 // DESKTOP es secundario y queda solo en consola.
 
-import { mkdirSync, writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { writeFileSync } from 'node:fs';
 import {
   METRICS, PAGINAS, parseArgs, resolveTarget, requireApiKey, queryRecord,
-  queryWithFallback, p75, histogram, fmtValor, hoy, printTable, dryRunRecord,
+  queryWithFallback, resolveOutPath, p75, histogram, fmtValor, hoy, printTable, dryRunRecord,
 } from './lib.mjs';
 
 const args = parseArgs(process.argv.slice(2));
@@ -103,8 +104,7 @@ for (const pagina of PAGINAS) {
   }
 }
 
-const outPath = resolve(process.cwd(), 'data', dryRun ? 'baseline.dry-run.json' : 'baseline.json');
-mkdirSync(resolve(process.cwd(), 'data'), { recursive: true });
+const outPath = resolveOutPath(args, dryRun ? 'baseline.dry-run.json' : 'baseline.json');
 writeFileSync(outPath, JSON.stringify(mediciones, null, 2) + '\n');
 console.log(`\n${mediciones.length} mediciones → ${outPath}`);
 if (!dryRun && mediciones.length === 0) {

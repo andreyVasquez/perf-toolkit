@@ -3,3 +3,4 @@ node_modules/
 data/
 *.zip
 .claude/
+.DS_Store

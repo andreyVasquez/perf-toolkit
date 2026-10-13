@@ -33,5 +33,75 @@
     "home": "https://thegummyboxwellness.com/",
     "pdp": "https://thegummyboxwellness.com/products/gomitas-con-vinagre-de-manzana",
     "collection": "https://thegummyboxwellness.com/collections/nuestros-productos"
+  },
+  {
+    "marca": "Mundo Barefoot",
+    "dominio": "https://mundobarefoot.cl",
+    "home": "https://mundobarefoot.cl/",
+    "pdp": "https://mundobarefoot.cl/products/botas-barefoot-impermeables-berkana-sowilo",
+    "collection": "https://mundobarefoot.cl/collections/top-adulto-barefoot"
+  },
+  {
+    "marca": "Tennis Premium",
+    "dominio": "https://www.tennispremium.co",
+    "home": "https://www.tennispremium.co/",
+    "pdp": "https://www.tennispremium.co/products/on-cloud-running-black-ivory",
+    "collection": "https://www.tennispremium.co/collections/all"
+  },
+  {
+    "marca": "Jormands",
+    "dominio": "https://jormands.com.co",
+    "home": "https://jormands.com.co/",
+    "pdp": "https://jormands.com.co/products/black-m30-backpack",
+    "collection": "https://jormands.com.co/collections/promo"
+  },
+  {
+    "marca": "Mumu",
+    "dominio": "https://mumucol.com",
+    "home": "https://mumucol.com/",
+    "pdp": "https://mumucol.com/products/kit-reduce",
+    "collection": "https://mumucol.com/collections/batido-verde"
+  },
+  {
+    "marca": "Vitasei",
+    "dominio": "https://www.vitasei.com.co",
+    "home": "https://www.vitasei.com.co/",
+    "pdp": "https://www.vitasei.com.co/products/magnesio-total-care-7-tipos-de-magnesio-formula-efervescente",
+    "collection": "https://www.vitasei.com.co/collections/ofertas"
+  },
+  {
+    "marca": "Sin Intermediarios",
+    "dominio": "https://www.sinintermediarios.co",
+    "home": "https://www.sinintermediarios.co/",
+    "pdp": "https://www.sinintermediarios.co/products/creatina-monohidrato-300g",
+    "collection": "https://www.sinintermediarios.co/collections/proteinas"
+  },
+  {
+    "marca": "Vitaly",
+    "dominio": "https://vitaly-chile.com",
+    "home": "https://vitaly-chile.com/",
+    "pdp": "https://vitaly-chile.com/products/vitaly-gotas-de-drenaje-linfatico",
+    "collection": "https://vitaly-chile.com/collections/cyber"
+  },
+  {
+    "marca": "Nutri11",
+    "dominio": "https://nutri11.com",
+    "home": "https://nutri11.com/",
+    "pdp": "https://nutri11.com/products/nutri-toothpaste",
+    "collection": "https://nutri11.com/collections/nutribreakfast"
+  },
+  {
+    "marca": "iEnergy",
+    "dominio": "https://ienergy.com.co",
+    "home": "https://ienergy.com.co/",
+    "pdp": "https://ienergy.com.co/products/greens",
+    "collection": "https://ienergy.com.co/"
+  },
+  {
+    "marca": "Crystal Time",
+    "dominio": "https://crystaltime.co",
+    "home": "https://crystaltime.co/",
+    "pdp": "https://crystaltime.co/products/audifonos-bose-quietcomfort-earbuds-copia",
+    "collection": "https://crystaltime.co/collections/relojes-premium"
   }
 ]

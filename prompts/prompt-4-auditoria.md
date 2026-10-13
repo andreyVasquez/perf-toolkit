@@ -1,6 +1,7 @@
 # Prompt 4 · Auditoría — clasifica en tres frentes
 
 > Paso 4 del SOP. Prerequisito: `CONSTRAINTS.md` sin PENDIENTES (GATING) y baseline LISTO. Sin fixes todavía.
+> **Ruta rápida:** este prompt repartido en 4 agentes + consolidador: `prompts/playbook-agentes.md` (Fase 1). Checklists con greps: `playbook-tema-nativo.md` y, si la tienda es Instant, `playbook-instant.md`.
 
 ---
 

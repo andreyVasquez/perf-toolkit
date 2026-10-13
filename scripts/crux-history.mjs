@@ -5,15 +5,16 @@
 //   node scripts/crux-history.mjs --home URL --pdp URL --collection URL [--marca X]
 //   node scripts/crux-history.mjs --marca X            (lee stores.json)
 //   node scripts/crux-history.mjs --marca X --dry-run  (data de ejemplo, sin API)
+//   node <toolkit>/scripts/crux-history.mjs             (desde la carpeta del proyecto: URLs del .env)
+//   --out RUTA: archivo .json o carpeta. Default: ./data/history.json del directorio ACTUAL.
 //
 // Misma escalera de fallback que el baseline: page-level → origin-level, marcada en "fuente".
 // Salida: tabla por página en consola + data/history.json.
 
-import { mkdirSync, writeFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { writeFileSync } from 'node:fs';
 import {
   METRICS, PAGINAS, parseArgs, resolveTarget, requireApiKey, queryHistory,
-  queryWithFallback, hoy, printTable,
+  queryWithFallback, resolveOutPath, hoy, printTable,
 } from './lib.mjs';
 
 const SEMANAS = 26; // ~6 meses
@@ -91,7 +92,6 @@ const salida = {
   paginas,
 };
 
-const outPath = resolve(process.cwd(), 'data', dryRun ? 'history.dry-run.json' : 'history.json');
-mkdirSync(resolve(process.cwd(), 'data'), { recursive: true });
+const outPath = resolveOutPath(args, dryRun ? 'history.dry-run.json' : 'history.json');
 writeFileSync(outPath, JSON.stringify(salida, null, 2) + '\n');
 console.log(`${paginas.length} páginas con serie → ${outPath}`);

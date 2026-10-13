@@ -1,6 +1,7 @@
 # Prompt 3 · Baseline — mide el punto de partida
 
 > Paso 3 del SOP. Prerequisito: Paso 2 LISTO. Requiere `$CRUX_API_KEY` en el `.env` y el MCP chrome-devtools activo.
+> **Ruta rápida:** la parte lab de este paso la hace el Agente A de `prompts/playbook-agentes.md`, en paralelo con la auditoría. Corre tú los scripts de CrUX antes de lanzar los agentes.
 
 ---
 

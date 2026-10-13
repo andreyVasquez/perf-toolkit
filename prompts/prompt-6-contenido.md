@@ -8,11 +8,11 @@ Estamos en el Paso 6 del SOP de ConvertMate: contenido (Frente B) de $SHOPIFY_ST
 
 Antes de que abra la ventana:
 1. Arma el plan por asset desde `data/diagnostico.json` (Frente B): URL actual · peso · spec destino · orden de reemplazo.
-2. Deja todos los assets ya convertidos (specs estándar: SVG > 50 KB → WebP/PNG 1080px < 150 KB · GIF → MP4 H.264 + poster · video autoplay → 720p 2–3 Mbps o poster + clic).
+2. Deja todos los assets ya convertidos (Agente C de `playbook-agentes.md`, o `node $TK/scripts/asset-optimize.mjs` si existe: TinyPNG + ffmpeg) (specs estándar: SVG > 50 KB → WebP/PNG 1080px < 150 KB · GIF → MP4 H.264 + poster · video autoplay → 720p 2–3 Mbps o poster + clic).
 3. Verifica que el aviso de ventana ya se envió.
 
 Dentro de la ventana:
-4. Reemplaza asset por asset en el orden del plan, verificando cada uno en la tienda tras subirlo.
+4. Reemplaza asset por asset en el orden del plan, verificando cada uno en la tienda tras subirlo. Assets de Instant: se reemplazan en el editor de Instant y se re-publica la sección, lo que regenera `sections/instant-*.liquid`: después, re-aplicar la lista del CHANGELOG y hacer pull de esos archivos (ver `playbook-instant.md`).
 
 Desinstalación de apps — protocolo de la sección 9, sin excepciones:
 1. Export o screenshots completos de la configuración (descuentos, flows, settings).

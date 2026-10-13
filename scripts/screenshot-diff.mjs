@@ -10,8 +10,8 @@
 // se anotan; las inesperadas BLOQUEAN la publicación). Exit code 1 si algún par supera el umbral.
 //
 // Dependencias: puppeteer-core + pixelmatch + pngjs (npm install en la raíz del toolkit).
-// Chrome local se resuelve con el mismo patrón que skills/convertmate-report/build-pdf.mjs:
-// --chrome > $CHROME_PATH > rutas conocidas (macOS/Linux/Windows). No instala Chromium propio.
+// Chrome local: --chrome > $CHROME_PATH > rutas conocidas (macOS/Linux/Windows), el mismo orden
+// que usan pixel-check.mjs y net-check.mjs (theme-lib.mjs). No instala Chromium propio.
 
 import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve, join } from 'node:path';
@@ -33,7 +33,7 @@ if (!args.live || !args.preview || !args.out) {
   process.exit(1);
 }
 
-// Mismo orden de resolución que build-pdf.mjs del skill convertmate-report.
+// Orden de resolución: --chrome > $CHROME_PATH > rutas conocidas.
 function findChrome() {
   const candidates = [
     typeof args.chrome === 'string' ? args.chrome : undefined,

@@ -6,6 +6,20 @@
   "engines": {
     "node": ">=18"
   },
+  "bin": {
+    "cm-new-project": "scripts/new-project.mjs",
+    "cm-push-changed": "scripts/push-changed.mjs",
+    "cm-pixel-check": "scripts/pixel-check.mjs",
+    "cm-net-check": "scripts/net-check.mjs",
+    "cm-asset-optimize": "scripts/asset-optimize.mjs",
+    "cm-crux-baseline": "scripts/crux-baseline.mjs",
+    "cm-crux-history": "scripts/crux-history.mjs",
+    "cm-screenshot-diff": "scripts/screenshot-diff.mjs"
+  },
+  "scripts": {
+    "check": "for f in scripts/*.mjs; do node --check \"$f\" || exit 1; done && echo 'scripts OK'",
+    "new-project": "node scripts/new-project.mjs"
+  },
   "dependencies": {
     "pixelmatch": "^6.0.0",
     "pngjs": "^7.0.0",

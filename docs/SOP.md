@@ -76,15 +76,20 @@ perf-toolkit/
 │   ├── crux-baseline.mjs      # p75 + histogramas, PHONE/DESKTOP, origin + 3 URLs
 │   ├── crux-history.mjs       # serie semanal ~6 meses (backtesting y cierre)
 │   ├── perf-check.mjs         # tabla semáforo de todas las marcas (--all lee stores.json)
-│   └── screenshot-diff.mjs    # preview vs live, mobile+desktop, 3 URLs
+│   ├── screenshot-diff.mjs    # preview vs live, mobile+desktop, 3 URLs
+│   ├── new-project.mjs        # pasos 1-2 automáticos: carpeta, .env, pull, zip, git + tag baseline, duplicado, tipo de tienda
+│   ├── push-changed.mjs       # push solo de archivos de código cambiados vs baseline (drift-check, smoke check)
+│   ├── pixel-check.mjs        # tags de medición por página con puppeteer (QA Gate 6.5)
+│   ├── net-check.mjs          # requests y prioridades sin MCP (fetchpriority, dobles descargas)
+│   └── asset-optimize.mjs     # (si existe) TinyPNG + ffmpeg para el Frente B
 ├── schemas/
 │   ├── baseline.schema.json
 │   ├── diagnostico.schema.json
 │   ├── resultados.schema.json
 │   └── ejemplos/              # un JSON válido por schema
-├── prompts/                   # los 8 prompts del SOP, versionados
+├── prompts/                   # los 8 prompts del SOP, versionados + playbooks (agentes, Instant, tema nativo)
 ├── skills/
-│   ├── convertmate-report/    # PDFs de entregables con marca (SKILL.md + build-pdf.mjs + template + fonts)
+│   ├── informe-estilo-convertmate/  # informes al cliente en HTML autocontenido con marca (SKILL.md + docgen.py + ejemplo)
 │   ├── performance/           # Addy Osmani, versión pinneada
 │   └── core-web-vitals/       # Addy Osmani, versión pinneada
 ├── templates/
@@ -110,7 +115,7 @@ claude mcp list   # debe aparecer chrome-devtools
 # 3. Skills desde el repo (NUNCA instalación individual desde GitHub)
 mkdir -p ~/.claude/skills
 cp -R ~/perf-toolkit/skills/* ~/.claude/skills/
-# Verificar dentro de claude con /skills: convertmate-report, performance, core-web-vitals
+# Verificar dentro de claude con /skills: informe-estilo-convertmate, performance, core-web-vitals
 ```
 
 **Eliminado del setup viejo:** el paso A.3 (remote debugging sobre tu Chrome personal). El MCP lanza su **propia instancia aislada con perfil limpio** — el Chrome personal ensucia los traces con extensiones y sesiones, y expone tus cuentas logueadas.
@@ -203,7 +208,7 @@ Recuerda: `set -a && source .env && set +a` antes de usar las variables (cada sh
 
 `LISTO CUANDO` cada hallazgo está clasificado A/B/C en `diagnostico.json` y el plan está aprobado antes de tocar código.
 
-**► Entregable 1 — Reporte de auditoría** (si el proyecto lo incluye): se genera desde `diagnostico.json` con el skill `convertmate-report` (sección 7).
+**► Entregable 1 — Reporte de auditoría** (si el proyecto lo incluye): se genera desde `diagnostico.json` con la skill `informe-estilo-convertmate` (sección 7).
 
 ---
 
@@ -248,7 +253,7 @@ Nada se publica sin pasar los tres checks. "Se ve y funciona igual" deja de ser 
 3. **Smoke-QA post-resync** (5 min): home, PDP y checkout cargan y funcionan en el preview. Lo publicado debe ser lo aprobado — el resync pudo cambiar algo.
 4. **Publica** desde el Admin (Temas → Publicar) y **tag en git** (`publish-AAAA-MM-DD`).
 5. **Re-mide** peso con la misma metodología (sección 2) → `data/resultados.json`.
-6. **► Entregable 2 — Informe de entrega** con `convertmate-report` (sección 7): qué se hizo por frente, peso antes/después, validación en ms, y los dos próximos hitos (dashboard en 2–3 días, CrUX en ~4 semanas).
+6. **► Entregable 2 — Informe de entrega** con la skill `informe-estilo-convertmate` (sección 7): qué se hizo por frente, peso antes/después, validación en ms, y los dos próximos hitos (dashboard en 2–3 días, CrUX en ~4 semanas). Va a ClickUp con un Loom; lo publica Kenn.
 7. **Follow-up +2–3 días:** captura del dashboard Web Performance del cliente con la mejora de usuarios reales → se envía con la plantilla de `mensajes-cliente.md`. **Con esto el proyecto cierra.**
 
 `LISTO CUANDO` el informe fue enviado y el follow-up del dashboard quedó agendado.
@@ -265,19 +270,27 @@ Nada del Frente C aparece en reportes, y **jamás** se le propone al cliente eva
 
 ## 7 · Entregables — generados, no redactados
 
-Dos plantillas, dos momentos. Ambas salen de los JSON del proyecto y se convierten en **PDF con marca ConvertMate** usando el skill `convertmate-report` del toolkit (fragmento HTML con las clases del kit → `build-pdf.mjs` → PDF A4 con banda, paleta y tipografía de la empresa).
+Dos plantillas, dos momentos. Ambas salen de los JSON del proyecto y se generan como **página HTML autocontenida con la identidad de ConvertMate** (no PDF) usando la skill `informe-estilo-convertmate` del toolkit: se copia `ejemplos/ejemplo-informe-velocidad.py`, se cambia solo el contenido con los bloques de `scripts/docgen.py` (`hero`, `metrics`, `table`, `learns`, `atribucion`…) y `python3` produce un único `.html` con estilos, logos e imágenes adentro.
 
-**1 · Reporte de auditoría** (post Paso 4). Estructura fija: resumen ejecutivo en lenguaje de negocio · metodología · resultados por página (lab vs campo vs umbral) · problemas priorizados (severidad × esfuerzo) · plan por fases con **rangos de esfuerzo, no fechas** · mejora esperada en **rangos conservadores, nunca cifras exactas** · riesgos e integraciones sensibles · próximos pasos.
+**Estructura recomendada de la skill:** hero con el resultado en una frase → lo que conseguimos (cifras) → punto de partida → qué encontramos → qué hicimos → antes y después → cómo lo verificamos → lo que sigue → lo que necesitamos de ustedes (numerado) → de dónde salen las cifras.
 
-**2 · Informe de entrega** (Paso 7). Qué se hizo por frente · tabla peso antes/después con `.delta` · validación técnica en ms · próximos hitos (dashboard, CrUX estimado) · `footer.method` con la metodología.
+**1 · Reporte de auditoría** (post Paso 4). Contenido fijo: resumen ejecutivo en lenguaje de negocio · metodología · resultados por página (lab vs campo vs umbral) · problemas priorizados (severidad × esfuerzo) · plan por fases con **rangos de esfuerzo, no fechas** · mejora esperada en **rangos conservadores, nunca cifras exactas** · riesgos e integraciones sensibles · próximos pasos.
 
-**QA humano antes de enviar cualquier PDF** (nadie lo delega a Claude Code):
+**2 · Informe de entrega** (Paso 7). Qué se hizo por frente · tabla peso antes/después · validación técnica en ms · próximos hitos (dashboard, CrUX estimado) · bloque `atribucion` con la metodología.
+
+**Cifras:** todas salen de `data/*.json` con la metodología de la sección 2. El ejemplo de la skill cita PageSpeed; en este proceso PageSpeed Insights no se usa, así que el bloque "De dónde salen las cifras" cita CrUX, el dashboard de Shopify y los traces con la metodología fija.
+
+**Reglas de la skill:** nunca nombrar a nadie del equipo ("nuestro equipo") · sin rayas (—): `documento()` falla si encuentra una · sin disculpas ni fechas prometidas · si algo no mejoró, se dice tal cual.
+
+**QA humano antes de entregar cualquier informe** (nadie lo delega a Claude Code):
 - Los números coinciden con `data/*.json` (nunca contra una corrida nueva de otra herramienta).
 - Proyecciones en rangos conservadores, no promesas.
 - Ningún fix listado pone en riesgo tracking/checkout sin su flag.
-- Nada del Frente C ni datos internos en el documento.
-- Nombre del cliente, fechas y URLs correctos.
-- El PDF abierto: sin cortes feos de página (usar `.page-break` si hace falta).
+- Nada del Frente C ni datos internos en el documento (la sección INTERNO de DIAGNOSTICO.md no se usa).
+- Nombre del cliente, fechas y URLs correctos; ningún nombre del equipo; sin rayas.
+- El `.html` abierto en el navegador, en celular (390 px) y computador: sin scroll horizontal, tablas legibles.
+
+**Entrega:** el `.html` se sube a la tarea de ClickUp (o al hilo del diario) junto con un **Loom** explicándolo. **Kenn** lo revisa, lo publica y se lo presenta al cliente; quien ejecuta no publica el informe. Sin Loom no se presenta.
 
 ---
 
